@@ -2,10 +2,10 @@ import React, {useState, useRef } from 'react';
 import { AgGridReact} from 'ag-grid-react';
 import DateFnsUtils from '@date-io/date-fns'; 
 import {
-  DatePicker,
+  
+  DateTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import Stack from '@mui/material/Stack';
@@ -17,12 +17,16 @@ import Tooltip from '@mui/material/Tooltip';
 
 
 function ToDo () {
-    const [todo, setTodo] = useState({description: '', date: '', priority: ''});
-    const [todos, setTodos] = useState([]);
+    const [todo, setTodo] = useState({ description: '', date: '', priority: '' });
+    const [date, setDate] = useState(new Date());
+  const [todos, setTodos] = useState([]);
     
-    const handleDateChange = (date) => {
-        setTodo({...todo, date: date.toLocaleDateString('fi')})
-    }
+ 
+
+  const handleDateChange = (event) => {
+    setDate(event);
+    setTodo({ ...todo, date: event.toLocaleString('fi') })
+  }
 
     const gridRef = useRef();
 
@@ -55,7 +59,7 @@ function ToDo () {
         <div style={{marginTop: 20, marginBottom: 30 }}>
             <Stack spacing={2} direction="row" justifyContent="center"  >
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                         <DatePicker onChange={date => handleDateChange(date)} />
+                         <DateTimePicker value={date} onChange={event => handleDateChange(event)} />
                     </MuiPickersUtilsProvider>
                 <TextField size="small" onChange={inputChanged} label="Description" name="description" value={todo.description}/>
                 <TextField size="small" onChange={inputChanged} label="Priority" name="priority" value={todo.priority}/>
