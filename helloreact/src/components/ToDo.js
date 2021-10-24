@@ -2,7 +2,6 @@ import React, {useState, useRef } from 'react';
 import { AgGridReact} from 'ag-grid-react';
 import DateFnsUtils from '@date-io/date-fns'; 
 import {
-  
   DateTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
@@ -47,6 +46,10 @@ function ToDo () {
     }
 }
 
+const clearTodo = () => {
+    setTodos([]);
+  }
+
     const columns = [
         {field: 'date', sortable: true, filter: true, floatingFilter: true},
         {field: 'description', sortable: true, filter: true, floatingFilter: true},
@@ -67,6 +70,8 @@ function ToDo () {
                 <Tooltip title="Delete selected line">
                 <Button variant="contained" color="error" startIcon={< DeleteIcon />} onClick={deleteTodo}>Delete</Button>
                 </Tooltip>
+                <Button variant="contained" color= "secondary" onClick={clearTodo}> Clear </Button>
+
             </Stack>
 
          
