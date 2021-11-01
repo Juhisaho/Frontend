@@ -12,7 +12,7 @@ function App() {
 
    return (
        <div className="App">
-         <AppBar>
+         <AppBar color="transparent">
             <Toolbar>
               <Typography variant="h6">
                   Car Shop
